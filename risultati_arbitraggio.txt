@@ -1,0 +1,28 @@
+Importo investito: 1000 USDT
+Prezzo di acquisto: 237.665 USDT
+Prezzo di vendita: 238.15 USDT
+Commissioni acquisto: 0.2%
+Commissioni vendita: 0.1%
+Guadagno netto: -0.96 USDT
+----------------------------------------
+Importo investito: 1000 USDT
+Prezzo di acquisto: 237.62 USDT
+Prezzo di vendita: 238.15 USDT
+Commissioni acquisto: 0.2%
+Commissioni vendita: 0.1%
+Guadagno netto: -0.77 USDT
+----------------------------------------
+Importo investito: 1500 USDT
+Prezzo di acquisto: 237.775 USDT
+Prezzo di vendita: 238.15 USDT
+Commissioni acquisto: 0.2%
+Commissioni vendita: 0.1%
+Guadagno netto: -2.14 USDT
+----------------------------------------
+Importo investito: 15000 USDT
+Prezzo di acquisto: 237.56 USDT
+Prezzo di vendita: 238.15 USDT
+Commissioni acquisto: 0.2%
+Commissioni vendita: 0.1%
+Guadagno netto: -7.78 USDT
+----------------------------------------
