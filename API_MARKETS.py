@@ -1,53 +1,61 @@
 import requests
 
-# Funzione per ottenere i prezzi da Binance
+def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_vendita, commissione_acquisto, commissione_vendita):
+    # Calcolo della quantità acquistata
+    quantita_acquistata = capitale_investito / (prezzo_acquisto * (1 + commissione_acquisto))
+    # Calcolo dell'importo netto di vendita
+    importo_vendita_netto = quantita_acquistata * prezzo_vendita * (1 - commissione_vendita)
+    # Guadagno netto
+    guadagno_netto = importo_vendita_netto - capitale_investito
+    
+    # Scrivere i risultati su un file di testo
+    with open("risultati_arbitraggio.txt", "a") as file:
+        file.write(f"Importo investito: {capitale_investito} USDT\n")
+        file.write(f"Prezzo di acquisto: {prezzo_acquisto} USDT\n")
+        file.write(f"Prezzo di vendita: {prezzo_vendita} USDT\n")
+        file.write(f"Commissioni acquisto: {commissione_acquisto * 100}%\n")
+        file.write(f"Commissioni vendita: {commissione_vendita * 100}%\n")
+        file.write(f"Guadagno netto: {guadagno_netto:.2f} USDT\n")
+        file.write("-" * 40 + "\n")
+    
+    return guadagno_netto
+
+# Funzioni per ottenere i prezzi dai vari exchange (come definite sopra)
+
+# Funzione per ottenere il prezzo da Binance
 def get_binance_price(symbol):
     url = f"https://api.binance.com/api/v3/ticker/price?symbol={symbol}"
     response = requests.get(url)
-    if response.status_code == 200:
-        return float(response.json()["price"])
-    else:
-        raise Exception(f"Errore API Binance: {response.text}")
+    data = response.json()
+    return float(data["price"])
 
-# Funzione per ottenere i prezzi da Kraken
+# Funzione per ottenere il prezzo da Kraken
 def get_kraken_price(symbol):
-    url = "https://api.kraken.com/0/public/Ticker"
-    params = {"pair": symbol}
-    response = requests.get(url, params=params)
-    if response.status_code == 200:
-        result = response.json()["result"]
-        key = list(result.keys())[0]  # Ottieni la coppia corretta
-        return float(result[key]["a"][0])  # Prezzo di acquisto
-    else:
-        raise Exception(f"Errore API Kraken: {response.text}")
+    url = f"https://api.kraken.com/0/public/Ticker?pair={symbol}"
+    response = requests.get(url)
+    data = response.json()
+    return float(data["result"][list(data["result"].keys())[0]]["c"][0])
 
-# Funzione per ottenere i prezzi da Coinbase
+# Funzione per ottenere il prezzo da Coinbase
 def get_coinbase_price(symbol):
     url = f"https://api.coinbase.com/v2/prices/{symbol}/spot"
     response = requests.get(url)
-    if response.status_code == 200:
-        return float(response.json()["data"]["amount"])
-    else:
-        raise Exception(f"Errore API Coinbase: {response.text}")
+    data = response.json()
+    return float(data["data"]["amount"])
 
-# Funzione per ottenere i prezzi da KuCoin
+# Funzione per ottenere il prezzo da KuCoin
 def get_kucoin_price(symbol):
     url = f"https://api.kucoin.com/api/v1/market/orderbook/level1?symbol={symbol}"
     response = requests.get(url)
-    if response.status_code == 200:
-        return float(response.json()["data"]["price"])
-    else:
-        raise Exception(f"Errore API KuCoin: {response.text}")
+    data = response.json()
+    return float(data["data"]["price"])
 
-# Funzione per ottenere i prezzi da Bitfinex
+# Funzione per ottenere il prezzo da Bitfinex
 def get_bitfinex_price(symbol):
-    url = f"https://api-pub.bitfinex.com/v2/ticker/t{symbol}"
+    url = f"https://api.bitfinex.com/v1/pubticker/{symbol}"
     response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()
-        return float(data[6])  # Prezzo di chiusura (ultima transazione)
-    else:
-        raise Exception(f"Errore API Bitfinex: {response.text}")
+    data = response.json()
+    return float(data["last_price"])
 
 # Wrapper per ottenere i prezzi da tutti gli exchange
 def get_prices(symbols):
@@ -75,30 +83,47 @@ def get_prices(symbols):
 
     return prices
 
-# Simboli da verificare (adatta ai formati degli exchange)
+# Simboli per i vari exchange
 symbols = {
     "binance": "SOLUSDT",
-    "kraken": "SOLUSDT",  # Kraken usa formati particolari
+    "kraken": "SOLUSDT",
     "coinbase": "SOL-USD",
     "kucoin": "SOL-USDT",
     "bitfinex": "SOLUSD"
 }
 
-# Ottieni i prezzi
+# Ottieni i prezzi dai vari exchange
 prices = get_prices(symbols)
+
 print("Prezzi raccolti dai principali exchange:")
 for exchange, price in prices.items():
     print(f"{exchange}: {price:.2f} USD")
 
-# Calcola le opportunità di arbitraggio
+# Determina l'exchange con il prezzo più basso e quello con il prezzo più alto
 min_price = min(prices.values())
 max_price = max(prices.values())
 
 exchange_min = [exchange for exchange, price in prices.items() if price == min_price][0]
 exchange_max = [exchange for exchange, price in prices.items() if price == max_price][0]
 
-if max_price > min_price:
-    profit = 10000 * ((max_price/min_price)-1)
-    print(f"\nArbitraggio possibile: compra a {min_price:.2f} USD su {exchange_min} e vendi a {max_price:.2f} USD su {exchange_max}. Guadagno potenziale: {profit:.2f} USD")
+# Imposta le commissioni per ogni exchange (valori in percentuale)
+commissioni = {
+    "Binance": {"acquisto": 0.001, "vendita": 0.001},
+    "Kraken": {"acquisto": 0.0025, "vendita": 0.004},
+    "Coinbase": {"acquisto": 0.006, "vendita": 0.004},
+    "KuCoin": {"acquisto": 0.001, "vendita": 0.001},
+    "Bitfinex": {"acquisto": 0.002, "vendita": 0.001}
+}
+
+# Calcola il guadagno potenziale
+capitale_investito = 5000  # in USDT
+commissione_acquisto = commissioni[exchange_min]["acquisto"]
+commissione_vendita = commissioni[exchange_max]["vendita"]
+
+guadagno = calcola_guadagno_arbitraggio(capitale_investito, min_price, max_price, commissione_acquisto, commissione_vendita)
+
+if guadagno > 0:
+    print(f"\nArbitraggio possibile: compra a {min_price:.2f} USD su {exchange_min} e vendi a {max_price:.2f} USD su {exchange_max}.")
+    print(f"Guadagno potenziale: {guadagno:.2f} USD")
 else:
     print("\nNessuna opportunità di arbitraggio al momento.")
