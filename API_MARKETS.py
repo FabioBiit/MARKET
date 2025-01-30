@@ -2,7 +2,7 @@ import requests
 from time import sleep
 from datetime import datetime
 
-def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_vendita, commissione_acquisto, commissione_vendita):
+def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_vendita, ex_acq, ex_ven, commissione_acquisto, commissione_vendita):
     # Calcolo della quantità acquistata
     quantita_acquistata = capitale_investito / (prezzo_acquisto * (1 + commissione_acquisto))
     # Calcolo dell'importo netto di vendita
@@ -13,8 +13,8 @@ def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_ven
     # Scrivere i risultati su un file di testo
     with open("risultati_arbitraggio_market_all.csv", "a") as file:
         file.write(f"Importo_investito, {capitale_investito} USDT\n")
-        file.write(f"Prezzo_di_acquisto, {prezzo_acquisto} USDT\n")
-        file.write(f"Prezzo_di_vendita, {prezzo_vendita} USDT\n")
+        file.write(f"Prezzo_di_acquisto, {prezzo_acquisto} USDT su {ex_acq}\n")
+        file.write(f"Prezzo_di_vendita, {prezzo_vendita} USDT su {ex_ven}\n")
         file.write(f"Commissioni_acquisto, {commissione_acquisto * 100}%\n")
         file.write(f"Commissioni_vendita, {commissione_vendita * 100}%\n")
         file.write(f"Guadagno_netto, {guadagno_netto:.2f} USDT\n")
@@ -23,8 +23,8 @@ def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_ven
     if guadagno_netto > 1:
         with open("risultati_arbitraggio_market_positivo.csv", "a") as file:
             file.write(f"Importo_investito, {capitale_investito} USDT\n")
-            file.write(f"Prezzo_di_acquisto, {prezzo_acquisto} USDT\n")
-            file.write(f"Prezzo_di_vendita, {prezzo_vendita} USDT\n")
+            file.write(f"Prezzo_di_acquisto, {prezzo_acquisto} USDT su {ex_acq}\n")
+            file.write(f"Prezzo_di_vendita, {prezzo_vendita} USDT su {ex_ven}\n")
             file.write(f"Commissioni_acquisto, {commissione_acquisto * 100}%\n")
             file.write(f"Commissioni_vendita, {commissione_vendita * 100}%\n")
             file.write(f"Guadagno_netto, {guadagno_netto:.2f} USDT\n")
@@ -156,7 +156,10 @@ while True:
         commissione_acquisto = commissioni[exchange_min]["acquisto"]
         commissione_vendita = commissioni[exchange_max]["vendita"]
 
-        guadagno = calcola_guadagno_arbitraggio(capitale_investito, min_price, max_price, commissione_acquisto, commissione_vendita)
+        ex_acq = exchange_min
+        ex_ven = exchange_max
+
+        guadagno = calcola_guadagno_arbitraggio(capitale_investito, min_price, max_price, ex_acq, ex_ven, commissione_acquisto, commissione_vendita)
 
         if guadagno > 0:
             print(f"\nArbitraggio possibile: compra a {min_price:.2f} USD su {exchange_min} e vendi a {max_price:.2f} USD su {exchange_max}.")
