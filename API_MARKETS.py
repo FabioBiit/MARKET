@@ -2,185 +2,107 @@ import requests
 from time import sleep
 from datetime import datetime
 
+# Funzione per calcolare il guadagno dell'arbitraggio
 def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_vendita, ex_acq, ex_ven, commissione_acquisto, commissione_vendita):
-    # Calcolo della commissione di acquisto
-    tot_commissione_acq = capitale_investito * commissione_acquisto
-
-    # Calcolo della quantità acquistata (dopo aver tolto la commissione)
-    quantita_acquistata = (capitale_investito - tot_commissione_acq) / prezzo_acquisto
-
-    # Calcolo della commissione di vendita
-    tot_commissione_ven = (quantita_acquistata * prezzo_vendita) * commissione_vendita
-
-    # Calcolo dell'importo netto di vendita
-    importo_vendita_netto = (quantita_acquistata * prezzo_vendita) - tot_commissione_ven
-
+    # Calcolo della quantità acquistata dopo la commissione
+    quantita_acquistata = (capitale_investito * (1 - commissione_acquisto)) / prezzo_acquisto
+    
+    # Calcolo dell'importo netto di vendita dopo la commissione
+    importo_vendita_netto = (quantita_acquistata * prezzo_vendita) * (1 - commissione_vendita)
+    
     # Guadagno netto
     guadagno_netto = importo_vendita_netto - capitale_investito
 
-    
-    # Scrivere i risultati su un file di testo
+    # Struttura dati per il log
+    log_entry = (
+        f"{datetime.now()}, {capitale_investito}, {prezzo_acquisto}, {ex_acq}, {prezzo_vendita}, {ex_ven}, "
+        f"{commissione_acquisto * 100}%, {commissione_vendita * 100}%, {guadagno_netto:.2f} USDT\n"
+    )
+
+    # Scrittura nei file CSV
     with open("risultati_arbitraggio_market_all.csv", "a") as file:
-        file.write(f"Importo_investito, {capitale_investito} USDT\n")
-        file.write(f"Prezzo_di_acquisto, {prezzo_acquisto} USDT su {ex_acq}\n")
-        file.write(f"Prezzo_di_vendita, {prezzo_vendita} USDT su {ex_ven}\n")
-        file.write(f"Commissioni_acquisto, {commissione_acquisto * 100}%\n")
-        file.write(f"Commissioni_vendita, {commissione_vendita * 100}%\n")
-        file.write(f"Guadagno_netto, {guadagno_netto:.2f} USDT\n")
-        file.write(f"Data_e_ora, {datetime.now()}\n")
+        file.write(log_entry)
 
     if guadagno_netto > 1:
         with open("risultati_arbitraggio_market_positivo.csv", "a") as file:
-            file.write(f"Importo_investito, {capitale_investito} USDT\n")
-            file.write(f"Prezzo_di_acquisto, {prezzo_acquisto} USDT su {ex_acq}\n")
-            file.write(f"Prezzo_di_vendita, {prezzo_vendita} USDT su {ex_ven}\n")
-            file.write(f"Commissioni_acquisto, {commissione_acquisto * 100}%\n")
-            file.write(f"Commissioni_vendita, {commissione_vendita * 100}%\n")
-            file.write(f"Guadagno_netto, {guadagno_netto:.2f} USDT\n")
-            file.write(f"Data_e_ora, {datetime.now()}\n")
+            file.write(log_entry)
     
     return guadagno_netto
 
-# Funzioni per ottenere i prezzi dai vari exchange (come definite sopra)
-
-# Funzione per ottenere il prezzo da Binance
-def get_binance_price(symbol):
-    url = f"https://api.binance.com/api/v3/ticker/price?symbol={symbol}"
-    response = requests.get(url)
-    data = response.json()
-    return float(data["price"])
-
-"""
-# Funzione per ottenere il prezzo da Kraken
-def get_kraken_price(symbol):
-    url = f"https://api.kraken.com/0/public/Ticker?pair={symbol}"
-    response = requests.get(url)
-    data = response.json()
-    return float(data["result"][list(data["result"].keys())[0]]["c"][0])
-
-# Funzione per ottenere il prezzo da Coinbase
-def get_coinbase_price(symbol):
-    url = f"https://api.coinbase.com/v2/prices/{symbol}/spot"
-    response = requests.get(url)
-    data = response.json()
-    return float(data["data"]["amount"])
-"""
-
-# Funzione per ottenere il prezzo da KuCoin
-def get_kucoin_price(symbol):
-    url = f"https://api.kucoin.com/api/v1/market/orderbook/level1?symbol={symbol}"
-    response = requests.get(url)
-    data = response.json()
-    return float(data["data"]["price"])
-
-# Funzione per ottenere il prezzo da Bitfinex
-def get_bitfinex_price(symbol):
-    url = f"https://api.bitfinex.com/v1/pubticker/{symbol}"
-    response = requests.get(url)
-    data = response.json()
-    return float(data["last_price"])
-
-# Wrapper per ottenere i prezzi da tutti gli exchange
-def get_prices(symbols):
-    prices = {}
+# Funzione generica per ottenere il prezzo da un exchange
+def get_price(url, key_path):
     try:
-        prices["Binance"] = get_binance_price(symbols["binance"])
+        response = requests.get(url)
+        response.raise_for_status()  # Controlla errori HTTP
+        data = response.json()
+        for key in key_path:
+            data = data[key]
+        return float(data)
     except Exception as e:
-        print(f"Errore Binance: {e}")
-    """    
-    try:
-        prices["Kraken"] = get_kraken_price(symbols["kraken"])
-    except Exception as e:
-        print(f"Errore Kraken: {e}")
-    try:
-        prices["Coinbase"] = get_coinbase_price(symbols["coinbase"])
-    except Exception as e:
-        print(f"Errore Coinbase: {e}")
-    """
-    try:
-        prices["KuCoin"] = get_kucoin_price(symbols["kucoin"])
-    except Exception as e:
-        print(f"Errore KuCoin: {e}")
-    try:
-        prices["Bitfinex"] = get_bitfinex_price(symbols["bitfinex"])
-    except Exception as e:
-        print(f"Errore Bitfinex: {e}")
+        print(f"Errore su {url}: {e}")
+        return None
 
-    return prices
+# URL e chiavi per ottenere il prezzo dai vari exchange
+EXCHANGE_API = {
+    "Binance": {"url": "https://api.binance.com/api/v3/ticker/price?symbol={}", "key_path": ["price"]},
+    "KuCoin": {"url": "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol={}", "key_path": ["data", "price"]},
+    "Bitfinex": {"url": "https://api.bitfinex.com/v1/pubticker/{}", "key_path": ["last_price"]}
+}
 
 # Simboli per i vari exchange
-symbolsSol = {
-    "binance": "SOLUSDT",
-    #"kraken": "SOLUSDT",
-    #"coinbase": "SOL-USD",
-    "kucoin": "SOL-USDT",
-    "bitfinex": "SOLUSD"
+SYMBOLS = {
+    "SOL": {"Binance": "SOLUSDT", "KuCoin": "SOL-USDT", "Bitfinex": "SOLUSD"},
+    "BTC": {"Binance": "BTCUSDT", "KuCoin": "BTC-USDT", "Bitfinex": "BTCUSD"},
+    "ETH": {"Binance": "ETHUSDT", "KuCoin": "ETH-USDT", "Bitfinex": "ETHUSD"},
+    "PEPE": {"Binance": "PEPEUSDT", "KuCoin": "PEPE-USDT"},
+    "DOGE": {"Binance": "DOGEUSDT", "KuCoin": "DOGE-USDT"},
+    "XRP": {"Binance": "XRPUSDT", "KuCoin": "XRP-USDT", "Bitfinex": "XRPUSD"},
+    "ADA": {"Binance": "ADAUSDT", "KuCoin": "ADA-USDT", "Bitfinex": "ADAUSD"},
+    "LTC": {"Binance": "LTCUSDT", "KuCoin": "LTC-USDT", "Bitfinex": "LTCUSD"}
 }
 
-symbolsBtc = {
-    "binance": "BTCUSDT",
-    #"kraken": "BTCUSD",
-    #"coinbase": "BTC-USD",
-    "kucoin": "BTC-USDT",
-    "bitfinex": "BTCUSD"
-}
-
-symbolsEth = {    
-    "binance": "ETHUSDT",
-    #"kraken": "ETHUSD",
-    #"coinbase": "ETH-USD",
-    "kucoin": "ETH-USDT",
-    "bitfinex": "ETHUSD"
-}
-
-# Commissioni per ogni exchange (valori in percentuale)
-commissioni = {
+# Commissioni per ogni exchange
+COMMISSIONI = {
     "Binance": {"acquisto": 0.001, "vendita": 0.001},
-    # "Kraken": {"acquisto": 0.0025, "vendita": 0.004},
-    # "Coinbase": {"acquisto": 0.006, "vendita": 0.004},
     "KuCoin": {"acquisto": 0.001, "vendita": 0.001},
     "Bitfinex": {"acquisto": 0.002, "vendita": 0.001}
 }
 
+# Funzione per ottenere i prezzi da tutti gli exchange per una data criptovaluta
+def get_prices(symbol_map):
+    prices = {}
+    for exchange, symbol in symbol_map.items():
+        api = EXCHANGE_API.get(exchange)
+        if api:
+            price = get_price(api["url"].format(symbol), api["key_path"])
+            if price:
+                prices[exchange] = price
+    return prices
+
+capitale_investito = 3000  # USDT
 while True:
-    # Ottieni i prezzi dai vari exchange
-    pricesSol = get_prices(symbolsSol)
-    pricesBtc = get_prices(symbolsBtc)
-    pricesEth = get_prices(symbolsEth)
+    print("\n--- Analisi Arbitraggio ---")
 
-    tot_prices = [pricesSol, pricesBtc, pricesEth]
+    for crypto, symbol_map in SYMBOLS.items():
+        prices = get_prices(symbol_map)
+        if len(prices) < 2:
+            print(f"Prezzi insufficienti per {crypto}.")
+            continue
 
-    print("Prezzi raccolti dai principali exchange:")
-    for i, prices in enumerate(tot_prices):  # Itera su ogni dizionario nella lista
-        print(f"Prezzi per la criptovaluta {i + 1}:")
+        min_ex, min_price = min(prices.items(), key=lambda x: x[1])
+        max_ex, max_price = max(prices.items(), key=lambda x: x[1])
 
-        # Determina l'exchange con il prezzo più basso e quello con il prezzo più alto
-        min_price = min(prices.values())
-        max_price = max(prices.values())
+        commissione_acquisto = COMMISSIONI[min_ex]["acquisto"]
+        commissione_vendita = COMMISSIONI[max_ex]["vendita"]
 
-        exchange_min = [exchange for exchange, price in prices.items() if price == min_price][0]
-        exchange_max = [exchange for exchange, price in prices.items() if price == max_price][0]
+        guadagno = calcola_guadagno_arbitraggio(
+            capitale_investito, min_price, max_price, min_ex, max_ex, commissione_acquisto, commissione_vendita
+        )
 
-        for exchange, price in prices.items():  # Itera su ogni coppia chiave-valore nel dizionario
-            print(f"{exchange}: {price:.2f} USD")
-
-        # Calcola il guadagno potenziale
-        capitale_investito = 3000  # in USDT
-        commissione_acquisto = commissioni[exchange_min]["acquisto"]
-        commissione_vendita = commissioni[exchange_max]["vendita"]
-
-        #print(commissione_acquisto)
-        #print(commissione_vendita)
-
-        ex_acq = exchange_min
-        ex_ven = exchange_max
-
-        guadagno = calcola_guadagno_arbitraggio(capitale_investito, min_price, max_price, ex_acq, ex_ven, commissione_acquisto, commissione_vendita)
-
-        if guadagno > 0:
-            print(f"\nArbitraggio possibile: compra a {min_price:.2f} USD su {exchange_min} e vendi a {max_price:.2f} USD su {exchange_max}.")
-            print(f"Guadagno potenziale: {guadagno:.2f} USD")
+        if guadagno > 1:
+            print(f"\n{crypto}: Compra a {min_price:.2f} USDT su {min_ex}, Vendi a {max_price:.2f} USDT su {max_ex}")
+            print(f"Guadagno potenziale: {guadagno:.2f} USDT")
         else:
-            print("\nNessuna opportunità di arbitraggio al momento.")
-    
-    sleep(5)  # Attesa prima della prossima iterazione
+            print("Nessuna opportunità di arbitraggio.")
+
+    sleep(5)  # Pausa prima del prossimo ciclo
