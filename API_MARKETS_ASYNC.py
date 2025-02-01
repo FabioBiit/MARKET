@@ -1,9 +1,10 @@
 import requests
 from time import sleep
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor
 
 # Funzione per calcolare il guadagno dell'arbitraggio
-def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_vendita, ex_acq, ex_ven, commissione_acquisto, commissione_vendita):
+def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_vendita, ex_acq, ex_ven, commissione_acquisto, commissione_vendita, crypto):
     # Calcolo della quantità acquistata dopo la commissione
     quantita_acquistata = (capitale_investito * (1 - commissione_acquisto)) / prezzo_acquisto
     
@@ -14,12 +15,11 @@ def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_ven
     guadagno_netto = importo_vendita_netto - capitale_investito
 
     # Struttura dati per il log
-
     log_entry = (
         f"{datetime.now()}, {capitale_investito}, {crypto}, {prezzo_acquisto}, {ex_acq}, {prezzo_vendita}, {ex_ven}, "
         f"{commissione_acquisto * 100}%, {commissione_vendita * 100}%, {guadagno_netto:.2f} USDT\n"
     )
-    
+
     # Scrittura nei file CSV
     with open("risultati_arbitraggio_market_all.csv", "a") as file:
         file.write(log_entry)
@@ -31,23 +31,23 @@ def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_ven
     return guadagno_netto
 
 # Funzione generica per ottenere il prezzo da un exchange
-def get_price(url, key_path):
+def get_price(url, key_path, exchange):
     try:
         response = requests.get(url)
         response.raise_for_status()  # Controlla errori HTTP
         data = response.json()
         for key in key_path:
             data = data[key]
-        return float(data)
+        return (exchange, float(data))  # Restituisce l'exchange e il prezzo
     except Exception as e:
         print(f"Errore su {url}: {e}")
-        return None
+        return (exchange, None)
 
 # URL e chiavi per ottenere il prezzo dai vari exchange
 EXCHANGE_API = {
     "Binance": {"url": "https://api.binance.com/api/v3/ticker/price?symbol={}", "key_path": ["price"]},
     "KuCoin": {"url": "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol={}", "key_path": ["data", "price"]},
-    "Bitfinex": {"url": "https://api.bitfinex.com/v1/pubticker/{}", "key_path": ["last_price"]}
+    "Bitfinex": {"url": "https://api.bitfinex.com/v1/pubticker/{}", "key_path": ["last_price"]},
 }
 
 # Simboli per i vari exchange
@@ -59,24 +59,30 @@ SYMBOLS = {
     "DOGE": {"Binance": "DOGEUSDT", "KuCoin": "DOGE-USDT"},
     "XRP": {"Binance": "XRPUSDT", "KuCoin": "XRP-USDT", "Bitfinex": "XRPUSD"},
     "ADA": {"Binance": "ADAUSDT", "KuCoin": "ADA-USDT", "Bitfinex": "ADAUSD"},
-    "LTC": {"Binance": "LTCUSDT", "KuCoin": "LTC-USDT", "Bitfinex": "LTCUSD"}
+    "LTC": {"Binance": "LTCUSDT", "KuCoin": "LTC-USDT", "Bitfinex": "LTCUSD"},
 }
 
 # Commissioni per ogni exchange
 COMMISSIONI = {
     "Binance": {"acquisto": 0.001, "vendita": 0.001},
     "KuCoin": {"acquisto": 0.001, "vendita": 0.001},
-    "Bitfinex": {"acquisto": 0.002, "vendita": 0.001}
+    "Bitfinex": {"acquisto": 0.002, "vendita": 0.001},
 }
 
-# Funzione per ottenere i prezzi da tutti gli exchange per una data criptovaluta
+# Funzione per ottenere i prezzi da tutti gli exchange per una data criptovaluta in parallelo
 def get_prices(symbol_map):
     prices = {}
-    for exchange, symbol in symbol_map.items():
-        api = EXCHANGE_API.get(exchange)
-        if api:
-            price = get_price(api["url"].format(symbol), api["key_path"])
-            if price:
+    with ThreadPoolExecutor() as executor:
+        futures = []
+        for exchange, symbol in symbol_map.items():
+            api = EXCHANGE_API.get(exchange)
+            if api:
+                url = api["url"].format(symbol)
+                futures.append(executor.submit(get_price, url, api["key_path"], exchange))
+        
+        for future in futures:
+            exchange, price = future.result()
+            if price is not None:
                 prices[exchange] = price
     return prices
 
@@ -96,10 +102,8 @@ while True:
         commissione_acquisto = COMMISSIONI[min_ex]["acquisto"]
         commissione_vendita = COMMISSIONI[max_ex]["vendita"]
 
-        crypto = SYMBOLS[crypto][min_ex]
-
         guadagno = calcola_guadagno_arbitraggio(
-            capitale_investito, min_price, max_price, min_ex, max_ex, commissione_acquisto, commissione_vendita
+            capitale_investito, min_price, max_price, min_ex, max_ex, commissione_acquisto, commissione_vendita, crypto
         )
 
         if guadagno > 1:
