@@ -24,7 +24,7 @@ def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_ven
     with open("risultati_arbitraggio_market_all.csv", "a") as file:
         file.write(log_entry)
 
-    if guadagno_netto > 1:
+    if guadagno_netto > 0.10:
         with open("risultati_arbitraggio_new_market_positivo.csv", "a") as file:
             file.write(log_entry)
 
@@ -51,10 +51,11 @@ EXCHANGE_API = {
 }
 
 # Simboli per i vari exchange
+# "ETH": {"Binance": "ETHUSDT", "KuCoin": "ETH-USDT", "Bitfinex": "ETHUSD"},
+
 SYMBOLS = {
     "SOL": {"Binance": "SOLUSDT", "KuCoin": "SOL-USDT", "Bitfinex": "SOLUSD"},
     "BTC": {"Binance": "BTCUSDT", "KuCoin": "BTC-USDT", "Bitfinex": "BTCUSD"},
-    "ETH": {"Binance": "ETHUSDT", "KuCoin": "ETH-USDT", "Bitfinex": "ETHUSD"},
     "PEPE": {"Binance": "PEPEUSDT", "KuCoin": "PEPE-USDT"},
     "DOGE": {"Binance": "DOGEUSDT", "KuCoin": "DOGE-USDT"},
     "XRP": {"Binance": "XRPUSDT", "KuCoin": "XRP-USDT", "Bitfinex": "XRPUSD"},
@@ -86,7 +87,7 @@ def get_prices(symbol_map):
                 prices[exchange] = price
     return prices
 
-capitale_investito = 3000  # USDT
+capitale_investito = 100  # USDT
 while True:
     print("\n--- Analisi Arbitraggio ---")
 
@@ -106,10 +107,31 @@ while True:
             capitale_investito, min_price, max_price, min_ex, max_ex, commissione_acquisto, commissione_vendita, crypto
         )
 
-        if guadagno > 1:
+        if guadagno > 0.10:
             print(f"\n{crypto}: Compra a {min_price:.2f} USDT su {min_ex}, Vendi a {max_price:.2f} USDT su {max_ex}")
             print(f"Guadagno potenziale: {guadagno:.2f} USDT")
+
+            """
+            if min_ex saldo is empty: # Da implementare
+                print(f"Recupera tutto il capitale dall'ultima transazione effettuata sull'exchange {max_ex}") # USDT
+                print(f"Trasferisci tutto il capitale recuperato sull'exchange {min_ex}") # USDT
+            """
+
+            print(f"Trasferisci tutto il capitale recuperato sull'exchange {min_ex}") # USDT
+
+            print(f"Eseguo Ordie Acquisto su {min_ex} di {crypto}")
+
+            print(f"Trasferisci la criptovaluta acquistata {crypto} sull'exchange {max_ex}")
+
+            print(f"Esegui Ordie Vendita su {max_ex} di {crypto}")
+
+            # Ho ipotizzato che la differenza di sleepage possa essere del 20% rispetto al guadagno, fosse così sarebbe accettabile!
+            sleepage = guadagno * 0.20
+            print(f"Guadagno effettivo 'stimato' considerando lo speepage: {guadagno - sleepage:.2f} USDT")
+
+            sleep(30)  # Simulo il tempo per il completamento di un ordine Acquisto-Venditas
+
         else:
             print("Nessuna opportunità di arbitraggio.")
 
-    sleep(20)  # Pausa prima del prossimo ciclo
+    sleep(5)  # Pausa prima del prossimo ciclo
