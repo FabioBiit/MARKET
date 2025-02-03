@@ -16,7 +16,7 @@ def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_ven
 
     # Struttura dati per il log
     log_entry = (
-        f"{datetime.now()}, {capitale_investito}, {crypto}, {prezzo_acquisto}, {ex_acq}, {prezzo_vendita}, {ex_ven}, "
+        f"{datetime.now()}, {capitale_investito}, {crypto}, {prezzo_acquisto:.10f}, {ex_acq}, {prezzo_vendita:.10f}, {ex_ven}, "
         f"{commissione_acquisto * 100}%, {commissione_vendita * 100}%, {guadagno_netto:.2f} USDT\n"
     )
 
@@ -48,19 +48,18 @@ EXCHANGE_API = {
     "Binance": {"url": "https://api.binance.com/api/v3/ticker/price?symbol={}", "key_path": ["price"]},
     "KuCoin": {"url": "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol={}", "key_path": ["data", "price"]},
     "Bitfinex": {"url": "https://api.bitfinex.com/v1/pubticker/{}", "key_path": ["last_price"]},
+    "Bybit": {"url": "https://api.bybit.com/v5/market/tickers?category=spot&symbol={}", "key_path": ["result", "list", 0, "lastPrice"]}
 }
 
 # Simboli per i vari exchange
-# "ETH": {"Binance": "ETHUSDT", "KuCoin": "ETH-USDT", "Bitfinex": "ETHUSD"},
-
 SYMBOLS = {
-    "SOL": {"Binance": "SOLUSDT", "KuCoin": "SOL-USDT", "Bitfinex": "SOLUSD"},
-    "BTC": {"Binance": "BTCUSDT", "KuCoin": "BTC-USDT", "Bitfinex": "BTCUSD"},
-    "PEPE": {"Binance": "PEPEUSDT", "KuCoin": "PEPE-USDT"},
-    "DOGE": {"Binance": "DOGEUSDT", "KuCoin": "DOGE-USDT"},
-    "XRP": {"Binance": "XRPUSDT", "KuCoin": "XRP-USDT", "Bitfinex": "XRPUSD"},
-    "ADA": {"Binance": "ADAUSDT", "KuCoin": "ADA-USDT", "Bitfinex": "ADAUSD"},
-    "LTC": {"Binance": "LTCUSDT", "KuCoin": "LTC-USDT", "Bitfinex": "LTCUSD"},
+    "SOL": {"Binance": "SOLUSDT", "KuCoin": "SOL-USDT", "Bitfinex": "SOLUSD", "Bybit": "SOLUSDT"},
+    "BTC": {"Binance": "BTCUSDT", "KuCoin": "BTC-USDT", "Bitfinex": "BTCUSD", "Bybit": "BTCUSDT"},
+    "PEPE": {"Binance": "PEPEUSDT", "KuCoin": "PEPE-USDT", "Bybit": "PEPEUSDT"},
+    "DOGE": {"Binance": "DOGEUSDT", "KuCoin": "DOGE-USDT", "Bybit": "DOGEUSDT"},
+    "XRP": {"Binance": "XRPUSDT", "KuCoin": "XRP-USDT", "Bitfinex": "XRPUSD", "Bybit": "XRPUSDT"},
+    "ADA": {"Binance": "ADAUSDT", "KuCoin": "ADA-USDT", "Bitfinex": "ADAUSD", "Bybit": "ADAUSDT"},
+    "LTC": {"Binance": "LTCUSDT", "KuCoin": "LTC-USDT", "Bitfinex": "LTCUSD", "Bybit": "LTCUSDT"}
 }
 
 # Commissioni per ogni exchange
@@ -68,6 +67,7 @@ COMMISSIONI = {
     "Binance": {"acquisto": 0.001, "vendita": 0.001},
     "KuCoin": {"acquisto": 0.001, "vendita": 0.001},
     "Bitfinex": {"acquisto": 0.002, "vendita": 0.001},
+    "Bybit": {"acquisto": 0.001, "vendita": 0.001}
 }
 
 # Funzione per ottenere i prezzi da tutti gli exchange per una data criptovaluta in parallelo
@@ -108,8 +108,8 @@ while True:
         )
 
         if guadagno > 0.10:
-            print(f"\n{crypto}: Compra a {min_price:.2f} USDT su {min_ex}, Vendi a {max_price:.2f} USDT su {max_ex}")
-            print(f"Guadagno potenziale: {guadagno:.2f} USDT")
+            print(f"\n{crypto}: Compra a {min_price:.10f} USDT su {min_ex}, Vendi a {max_price:.10f} USDT su {max_ex}")
+            print(f"Guadagno potenziale: {guadagno:.10f} USDT")
 
             """
             if min_ex saldo is empty: # Da implementare
@@ -119,19 +119,39 @@ while True:
 
             print(f"Trasferisci tutto il capitale recuperato sull'exchange {min_ex}") # USDT
 
-            print(f"Eseguo Ordie Acquisto su {min_ex} di {crypto}")
+            print(f"Eseguo Ordine Acquisto su {min_ex} di {crypto}")
 
             print(f"Trasferisci la criptovaluta acquistata {crypto} sull'exchange {max_ex}")
 
-            print(f"Esegui Ordie Vendita su {max_ex} di {crypto}")
+            # Ho ipotizzato che la differenza di slippage possa essere del 20% rispetto al guadagno, fosse così sarebbe accettabile!
+            slippage = guadagno * 0.20
+            print(f"Guadagno lordo 'stimato' considerando lo slippage: {guadagno - slippage:.10f} USDT")
 
-            # Ho ipotizzato che la differenza di sleepage possa essere del 20% rispetto al guadagno, fosse così sarebbe accettabile!
-            sleepage = guadagno * 0.20
-            print(f"Guadagno effettivo 'stimato' considerando lo speepage: {guadagno - sleepage:.2f} USDT")
+            sleep(30)  # Simulo il tempo per il completamento di un ordine Acquisto-Vendita
 
-            sleep(30)  # Simulo il tempo per il completamento di un ordine Acquisto-Venditas
+            # Recupero del prezzo di vendita aggiornato dopo lo sleep
+            exchange_vendita = max_ex
+            symbol_vendita = symbol_map[exchange_vendita]
+            api_vendita = EXCHANGE_API.get(exchange_vendita)
+
+            if api_vendita:
+                url_vendita = api_vendita["url"].format(symbol_vendita)
+                price_vendita = get_price(url_vendita, api_vendita["key_path"], exchange_vendita)[1]
+                print(f"Prezzo di vendita aggiornato: {price_vendita:.10f} USDT")
+
+                # Calcolo del guadagno reale
+                guadagno_reale = calcola_guadagno_arbitraggio(
+                    capitale_investito, min_price, price_vendita, min_ex, max_ex, commissione_acquisto, commissione_vendita, crypto
+                )
+
+                print(f"Guadagno netto stimato: {guadagno_reale:.10f} USDT")
+
+                if guadagno_reale >= 0.10:
+                     print(f"Eseguo Ordine Vendita su {max_ex} di {crypto}")
+                else:
+                    print("Arbitraggio non conveniente. Annulla ordine di vendita. Riavvio analisi.")
 
         else:
             print("Nessuna opportunità di arbitraggio.")
 
-    sleep(5)  # Pausa prima del prossimo ciclo
+    sleep(1)  # Pausa prima del prossimo ciclo

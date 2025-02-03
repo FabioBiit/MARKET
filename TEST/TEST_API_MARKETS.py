@@ -50,24 +50,6 @@ def get_binance_price(symbol):
     data = response.json()
     return float(data["price"])
 
-
-"""
-# Funzione per ottenere il prezzo da Kraken
-def get_kraken_price(symbol):
-    url = f"https://api.kraken.com/0/public/Ticker?pair={symbol}"
-    response = requests.get(url)
-    data = response.json()
-    return float(data["result"][list(data["result"].keys())[0]]["c"][0])
-
-# Funzione per ottenere il prezzo da Coinbase
-def get_coinbase_price(symbol):
-    url = f"https://api.coinbase.com/v2/prices/{symbol}/spot"
-    response = requests.get(url)
-    data = response.json()
-    return float(data["data"]["amount"])
-"""
-
-
 # Funzione per ottenere il prezzo da Bybit
 def get_bybit_price(symbol):
     url = "https://api.bybit.com/v5/market/tickers?category=spot"
@@ -76,18 +58,6 @@ def get_bybit_price(symbol):
         if ticker["symbol"] == symbol:
             return float(ticker["lastPrice"])
     return None
-
-# Funzione per ottenere il prezzo da Okx
-def get_okx_price(symbol):
-    url = f"https://www.okx.com/api/v5/market/ticker?instId={symbol}"
-    response = requests.get(url).json()
-    return float(response["data"][0]["last"])
-
-# Funzione per ottenere il prezzo da Mexc
-def get_mexc_price(symbol):
-    url = f"https://api.mexc.com/api/v3/ticker/price?symbol={symbol}"
-    response = requests.get(url).json()
-    return float(response["price"])
 
 # Funzione per ottenere il prezzo da KuCoin
 def get_kucoin_price(symbol):
@@ -110,30 +80,10 @@ def get_prices(symbols):
         prices["Binance"] = get_binance_price(symbols["binance"])
     except Exception as e:
         print(f"Errore Binance: {e}")
-
-    """    
-    try:
-        prices["Kraken"] = get_kraken_price(symbols["kraken"])
-    except Exception as e:
-        print(f"Errore Kraken: {e}")
-    try:
-        prices["Coinbase"] = get_coinbase_price(symbols["coinbase"])
-    except Exception as e:
-        print(f"Errore Coinbase: {e}")
-    """
-
     try:
         prices["Bybit"] = get_bybit_price(symbols["bybit"])
     except Exception as e:
         print(f"Errore Bybit: {e}")
-    try:
-        prices["Okx"] = get_okx_price(symbols["okx"])
-    except Exception as e:
-        print(f"Errore Okx: {e}")
-    try:
-        prices["Mexc"] = get_mexc_price(symbols["mexc"])
-    except Exception as e:
-        print(f"Errore Mexc: {e}") 
     try:
         prices["KuCoin"] = get_kucoin_price(symbols["kucoin"])
     except Exception as e:
@@ -148,33 +98,21 @@ def get_prices(symbols):
 # Simboli per i vari exchange
 symbolsSol = {
     "binance": "SOLUSDT",
-    #"kraken": "SOLUSDT",
-    #"coinbase": "SOL-USD",
     "bybit": "SOLUSDT",
-    "okx": "SOL-USDT",
-    "mexc": "SOLUSDT",
     "kucoin": "SOL-USDT",
     "bitfinex": "SOLUSD"
 }
 
 symbolsBtc = {
     "binance": "BTCUSDT",
-    #"kraken": "BTCUSD",
-    #"coinbase": "BTC-USD",
     "bybit": "BTCUSDT",
-    "okx": "BTC-USDT",
-    "mexc": "BTCUSDT",
-    "kucoin": "BTC-USDT",
+    "kucoin": "SOL-USDT",
     "bitfinex": "BTCUSD"
 }
 
 symbolsEth = {    
     "binance": "ETHUSDT",
-    #"kraken": "ETHUSD",
-    #"coinbase": "ETH-USD",
     "bybit": "ETHUSDT",
-    "okx": "ETH-USDT",
-    "mexc": "ETHUSDT",
     "kucoin": "ETH-USDT",
     "bitfinex": "ETHUSD"
 }
@@ -182,11 +120,7 @@ symbolsEth = {
 # Commissioni per ogni exchange (valori in percentuale)
 commissioni = {
     "Binance": {"acquisto": 0.001, "vendita": 0.001},
-    # "Kraken": {"acquisto": 0.0025, "vendita": 0.004},
-    # "Coinbase": {"acquisto": 0.006, "vendita": 0.004},
     "Bybit": {"acquisto": 0.001, "vendita": 0.001},
-    "Okx": {"acquisto": 0.008, "vendita": 0.001},
-    "Mexc": {"acquisto": 0.008, "vendita": 0.001},
     "KuCoin": {"acquisto": 0.001, "vendita": 0.001},
     "Bitfinex": {"acquisto": 0.002, "vendita": 0.001}
 }
