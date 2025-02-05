@@ -15,7 +15,9 @@ df["Exchange_ven"] = df["Exchange_ven"].str.strip()
 
 # df = df[( df["Moneta"].isin(["ADA", "XRP", "SOL"]) ) & ( df["Guadagno_netto"] >= 5.00 ) & ( df["Exchange_ven"] != 'Bitfinex')]
 
-df = df[( df["Moneta"].isin(["ADA", "XRP", "SOL"]) ) & ( df["Guadagno_netto"] >= 5.00 )]
+# df = df[( df["Moneta"].isin(["ADA", "XRP", "SOL"]) ) & ( df["Guadagno_netto"] >= 5.00 )]
+
+# df = df[(df["Guadagno_netto"] >= 5.00)]
 
 if not df.empty:
     delta_time = max(df["Data_e_ora"]) - min(df["Data_e_ora"])
