@@ -143,6 +143,8 @@ while True:
 
                 guadagno_reale = guadagno_reale - 3 # -1 per la commissione di prelievo su rete TRON-20 più -2 per la commissione sulla rete crypto
 
+                # Imposta i vari tempi di attesa trasferimento per le cripto e i vari costi di prelievo
+
                 print(f"Guadagno netto stimato: {guadagno_reale:.8f} USDT")
 
                 if guadagno_reale >= 1: 
