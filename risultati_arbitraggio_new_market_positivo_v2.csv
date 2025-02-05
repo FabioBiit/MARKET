@@ -1,2 +1,6 @@
 Data_e_ora,Capitale,Moneta,Prezzo_di_acquisto,Exchange_acq,Prezzo_di_vendita,Exchange_ven,Commissioni_acquisto,Commissioni_vendita,Guadagno_netto
 2025-02-05 16:10:01.846971, 5000, SOL, 201.7990000000, KuCoin, 203.1400000000, Bitfinex, 0.1%, 0.1%, 19.16 USDT
+2025-02-05 18:38:34.239748, 5000, XRP, 2.4024000000, Bybit, 2.4164000000, Bitfinex, 0.1%, 0.1%, 16.08 USDT
+2025-02-05 19:08:30.996374, 5000, LTC, 103.5100000000, Bitfinex, 104.4300000000, Binance, 0.2%, 0.1%, 26.32 USDT
+2025-02-05 19:37:45.745625, 5000, XRP, 2.4074700000, KuCoin, 2.4149000000, Bitfinex, 0.1%, 0.1%, 2.41 USDT
+2025-02-05 19:57:10.766128, 5000, XRP, 2.3455000000, Bybit, 2.3658000000, Bitfinex, 0.1%, 0.1%, 30.19 USDT

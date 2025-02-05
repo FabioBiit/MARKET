@@ -50,12 +50,12 @@ EXCHANGE_API = {
 # Simboli per i vari exchange
 SYMBOLS = {
     "SOL": {"Binance": "SOLUSDT", "KuCoin": "SOL-USDT", "Bitfinex": "tSOLUST", "Bybit": "SOLUSDT"},
-    #"BTC": {"Binance": "BTCUSDT", "KuCoin": "BTC-USDT", "Bitfinex": "BTCUSD", "Bybit": "BTCUSDT"},
-    #"PEPE": {"Binance": "PEPEUSDT", "KuCoin": "PEPE-USDT", "Bybit": "PEPEUSDT"},
+    "BTC": {"Binance": "BTCUSDT", "KuCoin": "BTC-USDT", "Bitfinex": "tBTCUST", "Bybit": "BTCUSDT"},
+    "PEPE": {"Binance": "PEPEUSDT", "KuCoin": "PEPE-USDT", "Bybit": "PEPEUSDT"},
     "DOGE": {"Binance": "DOGEUSDT", "KuCoin": "DOGE-USDT", "Bybit": "DOGEUSDT"},
     "XRP": {"Binance": "XRPUSDT", "KuCoin": "XRP-USDT", "Bitfinex": "tXRPUST", "Bybit": "XRPUSDT"},
     "ADA": {"Binance": "ADAUSDT", "KuCoin": "ADA-USDT", "Bitfinex": "tADAUST", "Bybit": "ADAUSDT"},
-    #"LTC": {"Binance": "LTCUSDT", "KuCoin": "LTC-USDT", "Bitfinex": "LTCUSD", "Bybit": "LTCUSDT"}
+    "LTC": {"Binance": "LTCUSDT", "KuCoin": "LTC-USDT", "Bitfinex": "tLTCUST", "Bybit": "LTCUSDT"}
 }
 
 # Commissioni per ogni exchange
@@ -141,11 +141,11 @@ while True:
                     capitale_investito, min_price, price_vendita, min_ex, max_ex, commissione_acquisto, commissione_vendita, crypto
                 )
 
+                guadagno_reale = guadagno_reale - 3 # -1 per la commissione di prelievo su rete TRON-20 più -2 per la commissione sulla rete crypto
+
                 print(f"Guadagno netto stimato: {guadagno_reale:.8f} USDT")
 
-                guadagno_reale = guadagno_reale - 4
-
-                if guadagno_reale >= 1: # -1 per la commissione di prelievo su rete TRON-20 più -2 per la commissione sulla rete crypto
+                if guadagno_reale >= 1: 
                     print(f"Eseguo Ordine Vendita su {max_ex} di {crypto}")
 
                     log_entry = (
@@ -157,7 +157,7 @@ while True:
                         file.write(log_entry)
 
                 else:
-                    print("Arbitraggio non conveniente. Annulla ordine di vendita. Riavvio analisi.")
+                    print(f"Arbitraggio non conveniente. Crea Ordine limit all'ultimo price rilevato {price_vendita:.10f}.")
 
         else:
             print("Nessuna opportunità di arbitraggio.")

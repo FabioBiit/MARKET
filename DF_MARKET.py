@@ -20,8 +20,8 @@ df = df[( df["Moneta"].isin(["ADA", "XRP", "SOL"]) ) & ( df["Guadagno_netto"] >=
 if not df.empty:
     delta_time = max(df["Data_e_ora"]) - min(df["Data_e_ora"])
     tot_guadagno = df["Guadagno_netto"].sum()
-    print(f"\nTotale guadagno:{tot_guadagno:.2f} USDT in {delta_time}")
     print(df)
+    print(f"\nTotale guadagno:{tot_guadagno:.2f} USDT in {delta_time}")
 else:
     print(df)
 
