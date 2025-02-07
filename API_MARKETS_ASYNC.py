@@ -50,9 +50,9 @@ EXCHANGE_API = {
 # Simboli per i vari exchange
 SYMBOLS = {
     "SOL": {"Binance": "SOLUSDT", "KuCoin": "SOL-USDT", "Bitfinex": "tSOLUST", "Bybit": "SOLUSDT"},
-    "BTC": {"Binance": "BTCUSDT", "KuCoin": "BTC-USDT", "Bitfinex": "tBTCUST", "Bybit": "BTCUSDT"},
-    "PEPE": {"Binance": "PEPEUSDT", "KuCoin": "PEPE-USDT", "Bybit": "PEPEUSDT"},
-    "DOGE": {"Binance": "DOGEUSDT", "KuCoin": "DOGE-USDT", "Bybit": "DOGEUSDT"},
+    #"BTC": {"Binance": "BTCUSDT", "KuCoin": "BTC-USDT", "Bitfinex": "tBTCUST", "Bybit": "BTCUSDT"},
+    #"PEPE": {"Binance": "PEPEUSDT", "KuCoin": "PEPE-USDT", "Bybit": "PEPEUSDT"},
+    #"DOGE": {"Binance": "DOGEUSDT", "KuCoin": "DOGE-USDT", "Bybit": "DOGEUSDT"},
     "XRP": {"Binance": "XRPUSDT", "KuCoin": "XRP-USDT", "Bitfinex": "tXRPUST", "Bybit": "XRPUSDT"},
     "ADA": {"Binance": "ADAUSDT", "KuCoin": "ADA-USDT", "Bitfinex": "tADAUST", "Bybit": "ADAUSDT"},
     "LTC": {"Binance": "LTCUSDT", "KuCoin": "LTC-USDT", "Bitfinex": "tLTCUST", "Bybit": "LTCUSDT"}
