@@ -19,6 +19,8 @@ df["Exchange_ven"] = df["Exchange_ven"].str.strip()
 
 # df = df[(df["Guadagno_netto"] >= 5.00)]
 
+df = df[(df["Moneta"].isin(["ADA", "XRP", "SOL", "LTC"]))]
+
 if not df.empty:
     delta_time = max(df["Data_e_ora"]) - min(df["Data_e_ora"])
     tot_guadagno = df["Guadagno_netto"].sum()
