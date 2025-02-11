@@ -21,8 +21,8 @@ def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_ven
     )
 
     # Scrittura nei file CSV
-    with open("risultati_arbitraggio_market_all.csv", "a") as file:
-        file.write(log_entry)
+    # with open("risultati_arbitraggio_market_all.csv", "a") as file:
+        # file.write(log_entry)
 
     return guadagno_netto
 
