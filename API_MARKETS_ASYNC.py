@@ -124,7 +124,7 @@ while True:
 
             print(f"Guadagno lordo 'stimato' considerando lo slippage: {guadagno - slippage:.8f} USDT")
 
-            sleep(180)  # Simulo il tempo per il completamento di un ordine Acquisto-Vendita
+            sleep(300)  # Simulo il tempo per il completamento di un ordine Acquisto-Vendita
 
             # Recupero del prezzo di vendita aggiornato dopo lo sleep
             exchange_vendita = max_ex
