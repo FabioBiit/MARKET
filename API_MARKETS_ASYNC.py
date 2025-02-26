@@ -15,10 +15,10 @@ def calcola_guadagno_arbitraggio(capitale_investito, prezzo_acquisto, prezzo_ven
     guadagno_netto = importo_vendita_netto - capitale_investito
 
     # Struttura dati per il log
-    log_entry = (
-        f"{datetime.now()}, {capitale_investito}, {crypto}, {prezzo_acquisto:.10f}, {ex_acq}, {prezzo_vendita:.10f}, {ex_ven}, "
-        f"{commissione_acquisto * 100}%, {commissione_vendita * 100}%, {guadagno_netto:.2f} USDT\n"
-    )
+    # log_entry = (
+        # f"{datetime.now()}, {capitale_investito}, {crypto}, {prezzo_acquisto:.10f}, {ex_acq}, {prezzo_vendita:.10f}, {ex_ven}, "
+        # f"{commissione_acquisto * 100}%, {commissione_vendita * 100}%, {guadagno_netto:.2f} USDT\n"
+    # )
 
     # Scrittura nei file CSV
     # with open("risultati_arbitraggio_market_all.csv", "a") as file:
@@ -159,7 +159,24 @@ while True:
                         file.write(log_entry)
 
                 else:
-                    print(f"Arbitraggio non conveniente. Crea Ordine limit all'ultimo price rilevato {price_vendita:.10f}.")
+                    print(f"Arbitraggio non conveniente. Crea Ordine limit all'ultimo price rilevato {max_price:.10f}.")
+
+
+                    """  # Da Testare!!!
+                    while(True):
+                    
+                        url_vendita = api_vendita["url"].format(symbol_vendita)
+                        price_vendita = get_price(url_vendita, api_vendita["key_path"], exchange_vendita)[1]
+                        print(f"Prezzo di vendita aggiornato: {price_vendita:.8f} USDT")
+
+                        sleep(5)
+
+                        if price_vendita >= max_price:
+                    
+                            print(f"Esecuzione ordine limit a: {max_price:.8f} USDT")
+
+                        break
+                    """
 
         else:
             print("Nessuna opportunità di arbitraggio.")
