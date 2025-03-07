@@ -177,7 +177,6 @@ Data_e_ora,Capitale,Moneta,Prezzo_di_acquisto,Exchange_acq,Prezzo_di_vendita,Exc
 2025-03-06 13:45:17.955693, 5000, ADA, 0.9334000000, Binance, 0.9384700000, Bitfinex, 0.1%, 0.1%, 14.11 USDT
 2025-03-06 16:16:40.706918, 5000, ADA, 0.9264200000, Bitfinex, 0.9344000000, Binance, 0.2%, 0.1%, 24.95 USDT
 2025-03-06 19:48:25.366215, 5000, ADA, 0.8867900000, Bitfinex, 0.8939000000, Binance, 0.2%, 0.1%, 21.98 USDT
-<<<<<<< HEAD
 2025-03-07 10:14:00.684870, 5000, ADA, 0.8717400000, Bitfinex, 0.8796000000, Binance, 0.2%, 0.1%, 26.96 USDT
 2025-03-07 10:22:43.321457, 5000, ADA, 0.8766900000, Bitfinex, 0.8837000000, KuCoin, 0.2%, 0.1%, 21.87 USDT
 2025-03-07 11:42:10.301688, 5000, ADA, 0.8746600000, Bitfinex, 0.8797000000, Binance, 0.2%, 0.1%, 10.73 USDT
@@ -192,5 +191,3 @@ Data_e_ora,Capitale,Moneta,Prezzo_di_acquisto,Exchange_acq,Prezzo_di_vendita,Exc
 2025-03-07 17:47:59.145378, 5000, ADA, 0.8203000000, KuCoin, 0.8236000000, Bitfinex, 0.1%, 0.1%, 7.08 USDT
 2025-03-07 18:03:13.764365, 5000, XRP, 2.4094000000, Bitfinex, 2.4369000000, Binance, 0.2%, 0.1%, 38.91 USDT
 2025-03-07 18:16:45.630688, 5000, ADA, 0.8278500000, Bitfinex, 0.8342000000, KuCoin, 0.2%, 0.1%, 20.25 USDT
-=======
->>>>>>> 9d0c42fe78baa5f0f4a4de70f1f3e68fc31a7995
