@@ -438,3 +438,291 @@
 2025-08-13 11:59:35,252 WARNING:[CB] LTC cooldown 5s
 2025-08-13 11:59:35,252 INFO:LTC: spread insuff (0.0000%)
 2025-08-13 11:59:40,288 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:02,720 INFO:== avvio arbitraggio async v5 (fee realtime + guardrail) ==
+2025-10-05 19:23:02,723 INFO:HTTP server on 0.0.0.0:8080 (healthz/metrics)
+2025-10-05 19:23:02,724 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:04,138 WARNING:Latenza alta 1286 ms su KuCoin SOL-USDT
+2025-10-05 19:23:07,719 WARNING:Latenza alta 4954 ms su Bybit SOLUSDT
+2025-10-05 19:23:07,721 WARNING:Latenza alta 4958 ms su Bitfinex tSOLUST
+2025-10-05 19:23:07,750 WARNING:Latenza alta 5009 ms su Binance SOLUSDT
+2025-10-05 19:23:07,753 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:07,753 INFO:SOL: spread insuff (0.0000%)
+2025-10-05 19:23:08,248 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:08,248 INFO:XRP: spread insuff (0.0100%)
+2025-10-05 19:23:08,689 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:08,689 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 19:23:09,118 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:09,119 INFO:LTC: spread insuff (0.0000%)
+2025-10-05 19:23:14,158 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:14,777 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:14,779 INFO:SOL: spread insuff (0.0043%)
+2025-10-05 19:23:15,164 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:15,178 INFO:XRP: spread insuff (0.0167%)
+2025-10-05 19:23:15,608 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:15,613 INFO:ADA: spread insuff (0.0118%)
+2025-10-05 19:23:16,058 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:16,058 INFO:LTC: spread insuff (0.0000%)
+2025-10-05 19:23:21,090 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:21,774 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:21,775 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:23:21,775 INFO:SOL: spread insuff (0.0043%)
+2025-10-05 19:23:22,137 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:22,137 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:23:22,139 INFO:XRP: spread insuff (0.0167%)
+2025-10-05 19:23:22,797 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:22,800 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:23:22,800 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 19:23:23,208 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:23,208 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:23:28,240 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:28,749 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:28,749 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:23:28,751 INFO:SOL: spread insuff (0.0043%)
+2025-10-05 19:23:29,318 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:29,320 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:23:29,320 INFO:XRP: spread insuff (0.0167%)
+2025-10-05 19:23:29,789 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:29,789 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:23:29,797 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 19:23:30,228 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:30,228 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:23:30,228 INFO:LTC: spread insuff (0.0083%)
+2025-10-05 19:23:35,265 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:36,284 WARNING:Latenza alta 894 ms su Binance SOLUSDT
+2025-10-05 19:23:38,013 WARNING:Latenza alta 2621 ms su Bybit SOLUSDT
+2025-10-05 19:23:38,013 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:38,013 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:23:38,013 INFO:SOL: spread insuff (0.0043%)
+2025-10-05 19:23:38,459 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:38,461 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:23:38,462 INFO:XRP: spread insuff (0.0017%)
+2025-10-05 19:23:38,924 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:38,924 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:23:38,924 INFO:ADA: spread insuff (0.0118%)
+2025-10-05 19:23:39,335 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:39,335 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:23:44,382 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:44,782 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:44,782 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:23:44,782 INFO:SOL: spread insuff (0.0043%)
+2025-10-05 19:23:45,240 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:45,240 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:23:45,240 INFO:XRP: spread insuff (0.0067%)
+2025-10-05 19:23:45,834 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:45,834 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:23:45,834 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 19:23:46,871 WARNING:Latenza alta 908 ms su KuCoin LTC-USDT
+2025-10-05 19:23:46,871 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:46,881 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:23:51,896 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:52,314 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:52,314 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:23:52,314 INFO:SOL: spread insuff (0.0000%)
+2025-10-05 19:23:52,618 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:52,622 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:23:52,623 INFO:XRP: spread insuff (0.0100%)
+2025-10-05 19:23:53,154 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:53,170 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:23:53,171 INFO:ADA: spread insuff (0.0118%)
+2025-10-05 19:23:53,574 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:53,574 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:23:53,576 INFO:LTC: spread insuff (0.0083%)
+2025-10-05 19:23:58,610 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:23:59,055 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:59,055 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:23:59,055 INFO:SOL: spread insuff (0.0000%)
+2025-10-05 19:23:59,439 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:23:59,439 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:23:59,439 INFO:XRP: spread insuff (0.0067%)
+2025-10-05 19:24:00,894 WARNING:Latenza alta 1359 ms su Bitfinex tADAUST
+2025-10-05 19:24:00,952 WARNING:Latenza alta 1371 ms su Bybit ADAUSDT
+2025-10-05 19:24:00,954 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:00,954 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:24:00,954 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 19:24:01,360 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:01,360 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:24:01,360 INFO:LTC: spread insuff (0.0167%)
+2025-10-05 19:24:06,389 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:24:06,864 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:06,867 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:24:06,867 INFO:SOL: spread insuff (0.0043%)
+2025-10-05 19:24:07,272 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:07,272 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:24:07,273 INFO:XRP: spread insuff (0.0073%)
+2025-10-05 19:24:07,617 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:07,617 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:24:07,617 INFO:ADA: spread insuff (0.0117%)
+2025-10-05 19:24:08,106 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:08,106 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:24:08,109 INFO:LTC: spread insuff (0.0000%)
+2025-10-05 19:24:13,128 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:24:13,604 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:13,604 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:24:13,604 INFO:SOL: spread insuff (0.0130%)
+2025-10-05 19:24:13,970 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:13,970 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:24:13,972 INFO:XRP: spread insuff (0.0133%)
+2025-10-05 19:24:14,355 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:14,355 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:24:14,355 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 19:24:14,766 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:14,766 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:24:14,769 INFO:LTC: spread insuff (0.0000%)
+2025-10-05 19:24:19,813 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:24:20,216 WARNING:SOL: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:20,216 WARNING:[CB] SOL cooldown 5s
+2025-10-05 19:24:20,216 INFO:SOL: spread insuff (0.0087%)
+2025-10-05 19:24:20,624 WARNING:XRP: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:20,624 WARNING:[CB] XRP cooldown 5s
+2025-10-05 19:24:20,632 INFO:XRP: spread insuff (0.0100%)
+2025-10-05 19:24:21,168 WARNING:ADA: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:21,168 WARNING:[CB] ADA cooldown 5s
+2025-10-05 19:24:21,168 INFO:ADA: spread insuff (0.0118%)
+2025-10-05 19:24:21,618 WARNING:LTC: orderbook error Bitfinex: too many values to unpack (expected 3)
+2025-10-05 19:24:21,618 WARNING:[CB] LTC cooldown 5s
+2025-10-05 19:24:21,618 INFO:LTC: spread insuff (0.0000%)
+2025-10-05 19:36:19,891 INFO:== avvio arbitraggio async v6 (ottimizzato) ==
+2025-10-05 19:36:19,891 INFO:HTTP server on 0.0.0.0:8080 (healthz/metrics)
+2025-10-05 19:36:19,891 ERROR:Errore imprevisto: name 'scan_once' is not defined
+{"ts": "2025-10-05T17:36:19.891180+00:00", "event": "error", "msg": "name 'scan_once' is not defined"}
+2025-10-05 19:36:24,897 ERROR:Errore imprevisto: name 'scan_once' is not defined
+{"ts": "2025-10-05T17:36:24.897560+00:00", "event": "error", "msg": "name 'scan_once' is not defined"}
+2025-10-05 19:42:34,485 INFO:== avvio arbitraggio async v6 (ottimizzato) ==
+2025-10-05 19:42:34,485 INFO:HTTP server on 0.0.0.0:8080 (healthz/metrics)
+2025-10-05 19:42:34,485 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:42:35,277 WARNING:SOL: orderbook error Bitfinex: Bitfinex empty book for tSOLUST
+2025-10-05 19:42:35,277 INFO:SOL: spread insuff (0.0000%)
+2025-10-05 19:42:35,958 WARNING:XRP: orderbook error Bitfinex: Bitfinex empty book for tXRPUST
+2025-10-05 19:42:35,958 INFO:XRP: spread insuff (0.0164%)
+2025-10-05 19:42:36,624 WARNING:ADA: orderbook error Bitfinex: Bitfinex empty book for tADAUST
+2025-10-05 19:42:36,640 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 19:42:37,328 WARNING:LTC: orderbook error Bitfinex: Bitfinex empty book for tLTCUST
+2025-10-05 19:42:37,328 INFO:LTC: spread insuff (0.0084%)
+2025-10-05 19:42:42,338 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:42:42,936 WARNING:SOL: orderbook error Bitfinex: Bitfinex empty book for tSOLUST
+2025-10-05 19:42:42,936 INFO:SOL: spread insuff (0.0087%)
+2025-10-05 19:42:43,278 WARNING:XRP: orderbook error Bitfinex: Bitfinex empty book for tXRPUST
+2025-10-05 19:42:43,278 INFO:XRP: spread insuff (0.0224%)
+2025-10-05 19:42:43,945 WARNING:ADA: orderbook error Bitfinex: Bitfinex empty book for tADAUST
+2025-10-05 19:42:43,945 INFO:ADA: spread insuff (0.0118%)
+2025-10-05 19:42:44,624 WARNING:LTC: orderbook error Bitfinex: Bitfinex empty book for tLTCUST
+2025-10-05 19:42:44,624 INFO:LTC: spread insuff (0.0084%)
+2025-10-05 19:42:49,627 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 19:42:50,040 WARNING:SOL: orderbook error Bitfinex: Bitfinex empty book for tSOLUST
+2025-10-05 19:42:50,040 INFO:SOL: spread insuff (0.0000%)
+2025-10-05 19:42:50,611 WARNING:XRP: orderbook error Bitfinex: Bitfinex empty book for tXRPUST
+2025-10-05 19:42:50,611 INFO:XRP: spread insuff (0.0204%)
+2025-10-05 20:42:38,395 INFO:== avvio arbitraggio async v7 (OKX+MEXC) ==
+2025-10-05 20:42:38,395 INFO:HTTP server on 0.0.0.0:8080 (healthz/metrics)
+2025-10-05 20:42:38,395 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:42:39,325 INFO:SOL: spread insuff (0.0306%)
+2025-10-05 20:42:39,888 INFO:XRP: spread insuff (0.0091%)
+2025-10-05 20:42:41,045 INFO:LTC: spread insuff (0.0084%)
+2025-10-05 20:42:46,053 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:42:46,692 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:42:47,351 INFO:XRP: spread insuff (0.0175%)
+2025-10-05 20:42:47,813 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 20:42:48,428 INFO:LTC: spread insuff (0.0084%)
+2025-10-05 20:42:53,437 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:42:54,085 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:42:54,592 INFO:XRP: spread insuff (0.0071%)
+2025-10-05 20:42:55,239 INFO:ADA: spread insuff (0.0118%)
+2025-10-05 20:42:55,883 INFO:LTC: spread insuff (0.0168%)
+2025-10-05 20:43:00,890 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:01,430 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:43:01,941 INFO:XRP: spread insuff (0.0087%)
+2025-10-05 20:43:02,547 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 20:43:03,193 INFO:LTC: spread insuff (0.0168%)
+2025-10-05 20:43:08,198 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:08,804 WARNING:[CB] SOL cooldown 10s
+2025-10-05 20:43:08,807 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:43:09,392 WARNING:[CB] XRP cooldown 10s
+2025-10-05 20:43:09,392 INFO:XRP: spread insuff (0.0087%)
+2025-10-05 20:43:10,053 WARNING:[CB] ADA cooldown 10s
+2025-10-05 20:43:10,053 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 20:43:10,681 WARNING:[CB] LTC cooldown 10s
+2025-10-05 20:43:10,681 INFO:LTC: spread insuff (0.0000%)
+2025-10-05 20:43:15,683 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:15,683 INFO:SOL: cooldown attivo
+2025-10-05 20:43:15,683 INFO:XRP: cooldown attivo
+2025-10-05 20:43:15,683 INFO:ADA: cooldown attivo
+2025-10-05 20:43:15,683 INFO:LTC: cooldown attivo
+2025-10-05 20:43:20,688 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:21,404 WARNING:[CB] SOL cooldown 10s
+2025-10-05 20:43:21,404 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:43:22,021 WARNING:[CB] XRP cooldown 10s
+2025-10-05 20:43:22,021 INFO:XRP: spread insuff (0.0168%)
+2025-10-05 20:43:22,683 WARNING:[CB] ADA cooldown 10s
+2025-10-05 20:43:22,683 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 20:43:23,263 WARNING:[CB] LTC cooldown 10s
+2025-10-05 20:43:23,263 INFO:LTC: spread insuff (0.0168%)
+2025-10-05 20:43:28,271 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:28,271 INFO:SOL: cooldown attivo
+2025-10-05 20:43:28,271 INFO:XRP: cooldown attivo
+2025-10-05 20:43:28,271 INFO:ADA: cooldown attivo
+2025-10-05 20:43:28,271 INFO:LTC: cooldown attivo
+2025-10-05 20:43:33,276 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:33,828 WARNING:[CB] SOL cooldown 10s
+2025-10-05 20:43:33,828 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:43:34,521 WARNING:[CB] XRP cooldown 10s
+2025-10-05 20:43:34,521 INFO:XRP: spread insuff (0.0128%)
+2025-10-05 20:43:35,126 WARNING:[CB] ADA cooldown 10s
+2025-10-05 20:43:35,126 INFO:ADA: spread insuff (0.0118%)
+2025-10-05 20:43:35,753 WARNING:[CB] LTC cooldown 10s
+2025-10-05 20:43:35,769 INFO:LTC: spread insuff (0.0084%)
+2025-10-05 20:43:40,775 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:40,775 INFO:SOL: cooldown attivo
+2025-10-05 20:43:40,775 INFO:XRP: cooldown attivo
+2025-10-05 20:43:40,775 INFO:ADA: cooldown attivo
+2025-10-05 20:43:40,775 INFO:LTC: cooldown attivo
+2025-10-05 20:43:45,808 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:46,430 WARNING:[CB] SOL cooldown 10s
+2025-10-05 20:43:46,430 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:43:46,990 WARNING:[CB] XRP cooldown 10s
+2025-10-05 20:43:46,990 INFO:XRP: spread insuff (0.0134%)
+2025-10-05 20:43:47,559 WARNING:[CB] ADA cooldown 10s
+2025-10-05 20:43:47,559 INFO:ADA: spread insuff (0.0119%)
+2025-10-05 20:43:48,215 WARNING:[CB] LTC cooldown 10s
+2025-10-05 20:43:48,216 INFO:LTC: spread insuff (0.0084%)
+2025-10-05 20:43:53,217 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:53,218 INFO:SOL: cooldown attivo
+2025-10-05 20:43:53,220 INFO:XRP: cooldown attivo
+2025-10-05 20:43:53,222 INFO:ADA: cooldown attivo
+2025-10-05 20:43:53,223 INFO:LTC: cooldown attivo
+2025-10-05 20:43:58,230 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:43:58,716 WARNING:[CB] SOL cooldown 10s
+2025-10-05 20:43:58,716 INFO:SOL: spread insuff (0.0175%)
+2025-10-05 20:43:59,173 WARNING:[CB] XRP cooldown 10s
+2025-10-05 20:43:59,173 INFO:XRP: spread insuff (0.0134%)
+2025-10-05 20:43:59,779 WARNING:[CB] ADA cooldown 10s
+2025-10-05 20:43:59,779 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 20:44:00,491 WARNING:[CB] LTC cooldown 10s
+2025-10-05 20:44:00,491 INFO:LTC: spread insuff (0.0084%)
+2025-10-05 20:44:05,496 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:44:05,496 INFO:SOL: cooldown attivo
+2025-10-05 20:44:05,496 INFO:XRP: cooldown attivo
+2025-10-05 20:44:05,496 INFO:ADA: cooldown attivo
+2025-10-05 20:44:05,496 INFO:LTC: cooldown attivo
+2025-10-05 20:44:10,503 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:44:10,959 WARNING:[CB] SOL cooldown 10s
+2025-10-05 20:44:10,959 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:44:11,458 WARNING:[CB] XRP cooldown 10s
+2025-10-05 20:44:11,459 INFO:XRP: spread insuff (0.0212%)
+2025-10-05 20:44:12,323 WARNING:[CB] ADA cooldown 10s
+2025-10-05 20:44:12,323 INFO:ADA: spread insuff (0.0119%)
+2025-10-05 20:44:12,917 WARNING:[CB] LTC cooldown 10s
+2025-10-05 20:44:12,919 INFO:LTC: spread insuff (0.0084%)
+2025-10-05 20:44:17,927 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:44:17,927 INFO:SOL: cooldown attivo
+2025-10-05 20:44:17,927 INFO:XRP: cooldown attivo
+2025-10-05 20:44:17,927 INFO:ADA: cooldown attivo
+2025-10-05 20:44:17,927 INFO:LTC: cooldown attivo
+2025-10-05 20:44:22,931 INFO:— Scan (async VWAP + fee realtime) —
+2025-10-05 20:44:23,487 WARNING:[CB] SOL cooldown 10s
+2025-10-05 20:44:23,494 INFO:SOL: spread insuff (0.0131%)
+2025-10-05 20:44:24,181 WARNING:[CB] XRP cooldown 10s
+2025-10-05 20:44:24,182 INFO:XRP: spread insuff (0.0044%)
+2025-10-05 20:44:24,743 WARNING:[CB] ADA cooldown 10s
+2025-10-05 20:44:24,743 INFO:ADA: spread insuff (0.0000%)
+2025-10-05 20:44:25,370 WARNING:[CB] LTC cooldown 10s
+2025-10-05 20:44:25,376 INFO:LTC: spread insuff (0.0000%)
