@@ -87,8 +87,8 @@ from time import sleep
 from datetime import datetime
 
 # Inserisci le tue API key e secret key
-api_key = "BlSWVI0QLPhZXBhE2GpGpM4dwpIHFIkozhZVZYzJVfCaBfkgsyaV8AzBeUXv5AQy"
-api_secret = "vM8TEQKn0TM5awsSxx43okpS0qguVczFFmGqnxXp6UaZ70f9Cb08U4LNdrNlQ8ZO"
+api_key = "get_from_env"
+api_secret = "get_from_env"
 
 # Crea il client Binance
 client = Client(api_key, api_secret)
